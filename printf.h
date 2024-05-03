@@ -32,7 +32,7 @@
 #endif
 
 // Main (d)printf defines
-int printf(const char *fmt, ...);
-int dprintf(const char *fmt, ...);
+int _printf(const char *fmt, ...);
+int _dprintf(const char *fmt, ...);
 
 #endif // __LPRINTF_H__

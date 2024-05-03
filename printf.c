@@ -24,13 +24,57 @@
  */
 
 #include "printf.h"
+#include <stdio.h>
 
-int printf(const char *fmt, ...)
+int _printf(const char *fmt, ...)
+{
+    __builtin_va_list argp;
+    __builtin_va_start(argp, fmt);
+
+    while (*fmt)
+    {
+        if (*fmt == '%')
+        {
+            fmt++;
+            switch (*fmt)
+            {
+            case 'd':
+                printf("%d", __builtin_va_arg(argp, int));
+                break;
+            case 'f':
+                printf("%f", __builtin_va_arg(argp, double));
+                break;
+            case 'c':
+                printf("%c", __builtin_va_arg(argp, int));
+                break;
+            case 's':
+                printf("%s", __builtin_va_arg(argp, char *));
+                break;
+            default:
+                putchar('%');
+                putchar(*fmt);
+                break;
+            }
+        }
+        else
+        {
+            putchar(*fmt);
+        }
+        fmt++;
+    }
+
+    __builtin_va_end(argp);
+
+    printf("\n");
+    return 0;
+}
+
+int _dprintf(const char *fmt, ...)
 {
     return 0;
 }
 
-int dprintf(const char *fmt, ...)
+int main()
 {
-    return 0;
+    _printf("This is a %s %d", "test", 123);
 }
