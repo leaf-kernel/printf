@@ -38,6 +38,7 @@ void _out_dbg_char(char ch)
 
 int _printf(const char *fmt, ...)
 {
+    int count = 0;
     __builtin_va_list argp;
     __builtin_va_start(argp, fmt);
 
@@ -48,41 +49,23 @@ int _printf(const char *fmt, ...)
             fmt++;
             switch (*fmt)
             {
+                // TODO: Actually handle the format specifier
             }
         }
         else
         {
             _out_nrm_char(*fmt);
+            count++;
         }
         fmt++;
     }
 
     __builtin_va_end(argp);
-    return 0;
+    return count;
 }
 
 int _dprintf(const char *fmt, ...)
 {
-    __builtin_va_list argp;
-    __builtin_va_start(argp, fmt);
-
-    while (*fmt)
-    {
-        if (*fmt == '%')
-        {
-            fmt++;
-            switch (*fmt)
-            {
-            }
-        }
-        else
-        {
-            _out_dbg_char(*fmt);
-        }
-        fmt++;
-    }
-
-    __builtin_va_end(argp);
     return 0;
 }
 
